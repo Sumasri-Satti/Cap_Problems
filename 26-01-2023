@@ -87,3 +87,24 @@ class Solution {
         return true;
     }
 }
+
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+
+4. DIFFERENCE BETWEEN ELEMENT SUM AND DIGIT SUM OF AN ARRAY
+
+class Solution {
+    public int differenceOfSum(int[] nums) {
+        int esum=0,dsum=0;
+        for(int i:nums){
+            esum+=i;
+            while(i!=0){
+                int rem=i%10;
+                dsum+=rem;
+                i=i/10;
+            }
+        }
+        return Math.abs(dsum-esum);
+    }
+}
