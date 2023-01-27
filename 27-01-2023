@@ -43,3 +43,195 @@ class Solution {
         return result;
     }
 }
+
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+
+2.BINARY TREE ZIGZAG LEVEL ORDER TRAVERSAL
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        Queue<TreeNode> queue=new LinkedList<>();
+        List<List<Integer>> result=new LinkedList<>();
+        if(root!=null){
+            queue.add(root);
+            boolean forward=true;
+            while(queue.size()>0){
+                LinkedList<Integer> l=new LinkedList<>();
+                int n=queue.size();
+                for(int i=0;i<n;i++){
+                    TreeNode curr= queue.poll();
+                    if(forward)
+                        l.add(curr.val);
+                    else
+                        l.addFirst(curr.val);
+                    if(curr.left!=null)
+                        queue.add(curr.left);
+                    if(curr.right!=null)
+                        queue.add(curr.right);
+                }
+                forward=!forward;
+                result.add(l);
+            }
+        }
+        return result;
+    }
+}
+
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+
+3.LOWEST COMMON ANCESTOR OF A BNARY TREE
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null) return null;
+        if(root==p || root==q) return root;
+
+        TreeNode left=lowestCommonAncestor(root.left,p,q);
+        TreeNode right=lowestCommonAncestor(root.right,p,q);
+
+        if(left!=null && right!=null) return root;
+        if(left!=null) return left;
+        if(right!=null) return right;
+        return null;
+    }
+}
+
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+
+4.SUM OF LEFT LEAVES
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int sum=0;
+
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root==null) return 0;
+        else{
+            if(root.left!=null && root.left.left==null && root.left.right==null) 
+                sum+=root.left.val;
+            sumOfLeftLeaves(root.left);
+            sumOfLeftLeaves(root.right);
+        }
+        return sum;
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+
+5.BINARY TREE RIGHT SIDE VIEW
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> result=new LinkedList<>();
+        Queue<TreeNode> queue=new LinkedList<>();
+        if(root!=null){
+            queue.offer(root);
+            while(queue.size()>0){
+                int n=queue.size();
+
+                for(int i=0;i<n;i++){
+                    TreeNode curr = queue.poll();
+                    if(curr.left!=null) 
+                        queue.offer(curr.left);
+                    if(curr.right!=null)
+                        queue.offer(curr.right);
+                    
+                    if(i==n-1) 
+                        result.add(curr.val);
+                }
+            }
+        }
+        return result;
+    }
+}
+
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+
+6.PATH SUM
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root==null) return false;
+        if(root.left==null && root.right==null) {
+            targetSum-=root.val;
+            if(targetSum==0) return true;
+        }
+        return hasPathSum(root.left,targetSum-root.val) || hasPathSum(root.right,targetSum-root.val);
+    }
+}
