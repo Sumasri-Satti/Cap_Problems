@@ -1,0 +1,79 @@
+DAY-8
+
+1.  INSERT INTO A BINARY SEARCH TREE
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        TreeNode newNode=new TreeNode(val);
+        TreeNode curr=root;
+        TreeNode parent=null;
+
+        if(root==null) 
+            return new TreeNode(val);
+        while(curr!=null){
+            parent=curr;
+            if(curr.val<val) curr=curr.right;
+            else curr=curr.left;
+        }
+        if(parent.val<val) parent.right=newNode;
+        else parent.left=newNode;
+        return root;
+    }
+}
+
+
+______________________________________________________________________________________________________________________________________________________________________
+
+
+2.INCREASING ORDER SEARCH TREE 
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    
+    public void inOrder(TreeNode root,LinkedList<Integer> res){
+        if(root!=null){
+            inOrder(root.left,res);
+            res.add(root.val);
+            inOrder(root.right,res);
+        }
+    }
+    public TreeNode increasingBST(TreeNode root) {
+        LinkedList<Integer> res=new LinkedList<>();
+        inOrder(root,res);
+        TreeNode nroot =new TreeNode(res.get(0)),curr=nroot;
+        for(int i=1;i<res.size();i++){
+            curr.right=new TreeNode(res.get(i));
+            curr=curr.right;
+        }
+        return nroot;
+    }
+}
