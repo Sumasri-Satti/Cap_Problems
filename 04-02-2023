@@ -1,0 +1,97 @@
+ 
+DAY-13
+
+Hackerrank-Javaaoopsgood
+https://www.hackerrank.com/contests/javaoopsgood/challenges
+
+1.STUDENT NORMAL
+class Student{
+    private String name,branch;
+    private int roll,year;
+    private static int numberOfStuds;
+    private List<Integer> marks=new ArrayList<>();
+       
+   
+    public String getName(){
+        return name;
+    }
+    public String getBranch(){
+        return branch;
+    }
+   
+    public int getRoll(){
+        return roll;
+    }
+   
+    public int getYear(){
+        return year;
+    }
+    public List<Integer> getMarks(){
+        return marks;
+    }
+    public void setMarks(int mark){
+        this.marks.add(mark);
+    }
+    Student(String name,int roll,String branch,int year){
+        this.roll=roll;
+        this.year=year;
+        this.name=name;
+        this.branch=branch;
+        numberOfStuds++;
+    }
+    public void display(){
+        System.out.println(roll+" "+name+" "+branch+" "+year);
+    }
+    public double computePercentage(){
+        double sum=0;
+        for(int i:marks){
+            sum+=i;
+        }
+        if(marks.size()<1) return 0.00;
+        return sum/marks.size();
+    }
+    public static void displayNoStuds(){
+        System.out.println("NoOfStudents="+numberOfStuds);
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+
+2.BANK ACCOUNT
+
+class BankAccount{
+    private String name;
+    private int accountNo,balance;
+    
+    public String getName(){
+        return name;
+    }
+    public int getAccountNo(){
+        return accountNo;
+    }
+    public int balance(){
+        return balance;
+    }
+    public void setBalance(int balance){
+        this.balance=balance;
+    }
+    public void setAccountNo(int accountNo){
+        this.accountNo=accountNo;
+    }
+    BankAccount(String name){
+        this.name=name;
+    }
+    public void deposit(int dep){
+        balance+=dep;
+    }
+    public void withdraw(int dep){
+        if(balance-dep<0)
+            System.out.println("Negative Balance Transaction Cancelled");
+        else 
+            balance-=dep;
+    }
+    public void display(){
+        System.out.println(accountNo+" "+name+" "+balance);
+    }
+}
