@@ -1,0 +1,239 @@
+DAY-14
+
+Hackerrank-Javaaoopsgood
+https://www.hackerrank.com/contests/javaoopsgood/challenges
+
+1.CLASS AND OBJECT 9
+
+class Person{
+    private int age;
+    
+    Person(int initialAge){
+        if(initialAge<0){
+            age=0;
+            System.out.println("Age is not valid, setting age to 0.");
+        }
+        else
+            age=initialAge;
+    }
+    
+    public void yearPasses(){
+        age+=1;
+    }
+    
+    public void amIOld(){
+        if(age<13)
+            System.out.println("You are young.");
+        else if(age>=13 && age<18)
+            System.out.println("You are a teenager.");
+        else
+            System.out.println("You are old.");
+    }
+    
+}
+
+______________________________________________________________________________________________________________________________________________________________________
+
+2.CUSTOM INTEGER LIST
+
+class IntegerList{
+    private int[] list;
+    private int elementIndex;
+    private int size,i=0;
+    public IntegerList(int size){
+        this.size=size;
+        list=new int[size];
+    }
+    public void add(int value){
+        if(i<size){
+            list[i++]=value;
+        }
+        else
+            System.out.println("can't add, list is full");
+        
+    }
+    public String toString(){
+        String res="";
+        for(int j=0;j<size;j++){
+            res+= j+" : "+list[j];
+            if(j<size-1)
+                res+="\n";
+        }
+        return res;
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+3.DOG INHERITANCE 1
+
+class Dog{
+    private String name;
+    public String getName(){
+        return name;
+    }
+    Dog(String name){
+        this.name=name;
+    }
+}
+
+class Greyhound extends Dog{
+    private String color;
+    private int weight;
+    Greyhound(String name, String color,int weight){
+        super(name);
+        this.color=color;
+        this.weight=weight;
+    }
+    public String getColor(){
+        return color;
+    }
+    public int getWeight(){
+        return weight;
+    }
+    public String toString(){
+        return super.getName() + " is " + color + " in color and his weight is " + weight + "Kg";
+    }
+}
+
+______________________________________________________________________________________________________________________________________________________________________
+
+4.INHERITANCE PERSON STUDENT
+
+class Person{
+    private String firstName,lastName;
+    private int id;
+    
+    Person(String firstName,String lastName,int id){
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.id=id;
+    }
+    
+    public void printPerson(){
+        System.out.print("Name: "+lastName+", "+firstName+"\nID: "+id+"\n");
+    }
+}
+
+class Student extends Person{
+    private int[]scores;
+    
+    Student(String firstName,String lastName,int id,int scores[]){
+        super(firstName,lastName,id);
+        this.scores=scores;
+    }
+        
+    public char calculate(){
+        int sum=0;
+        for(int i:scores){
+            sum+=i;
+        }
+        double a=sum/scores.length;
+        char c='q';
+        if(a>=90 && a<=100)
+            c='O';
+        else if(a>=80 && a<90)
+            c='E';
+        else if(a>=70 && a<80)
+            c='A';
+        else if(a>=60 && a<70)
+            c='P';
+        else if(a>=50 && a<60)
+            c='D';
+        else if(a<40)
+            c='T';
+        return c;
+    }
+    
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+5.SHAPE HIERARCHY INTERFACES
+
+interface Shape{
+    double area();
+    double perimeter();
+}
+class Rectangle implements Shape{
+    private double l,b;
+    Rectangle(double l, double b){
+        this.l=l;
+        this.b=b;
+    }
+    public double perimeter(){
+        return 2*(l+b);
+    }
+    public double area(){
+        return l*b;
+    }
+}
+class Square implements Shape{
+    private double size;
+    Square(double size){
+        this.size=size;
+    }
+    public double perimeter(){
+        return 4*size;
+    }
+    public double area(){
+        return size*size;
+    }
+}
+class Circle implements Shape{
+    private double radius;
+    Circle(double radius){
+        this.radius=radius;
+    }
+    public double perimeter(){
+        return 2*22*radius/7;
+    }
+    public double area(){
+        return 22*radius*radius/7;
+    }
+}
+class Choose{
+    public static void computeParams(String shape[]){
+        if(shape[0].equals("R")){
+            Rectangle r=new Rectangle(Double.parseDouble(shape[1]),Double.parseDouble(shape[2]));
+            System.out.printf("%.2f ",r.area());
+            System.out.printf("%.2f%n",r.perimeter());
+        }
+        if(shape[0].equals("S")){
+            Square s=new Square(Double.parseDouble(shape[1]));
+            System.out.printf("%.2f ",s.area());
+            System.out.printf("%.2f%n",s.perimeter());
+        }
+        if(shape[0].equals("C")){
+            Circle c=new Circle(Double.parseDouble(shape[1]));
+            System.out.printf("%.2f ",c.area());
+            System.out.printf("%.2f%n",c.perimeter());
+        }    
+            
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+6.CUSTOM SORT OBJECT
+
+class Candidate implements Comparable<Candidate>{
+    private String name;
+    private int mark;
+    
+    public String getName(){
+        return name;
+    }
+    public int getMark(){
+        return mark;
+    }
+    public Candidate(String name,int mark){
+        this.name=name;
+        this.mark=mark;
+    }
+    
+    public int compareTo(Candidate candidate){
+        return this.mark - candidate.mark;
+    }
+    
+}
