@@ -1,0 +1,413 @@
+DAY-15
+
+1.GRADING STUDENTS
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'gradingStudents' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts INTEGER_ARRAY grades as parameter.
+     */
+
+    public static List<Integer> gradingStudents(List<Integer> grades) {
+    // Write your code here
+        List<Integer> c=new ArrayList<>();
+        for(int i=0;i<grades.size();i++){
+            int ce=(int)Math.ceil(grades.get(i)/5.0);
+            if(grades.get(i)<38)
+                c.add(grades.get(i));
+            else if(ce*5-grades.get(i)<3)
+                c.add(ce*5);
+            else
+                c.add(grades.get(i));
+        }
+        return c;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int gradesCount = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Integer> grades = IntStream.range(0, gradesCount).mapToObj(i -> {
+            try {
+                return bufferedReader.readLine().replaceAll("\\s+$", "");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        })
+            .map(String::trim)
+            .map(Integer::parseInt)
+            .collect(toList());
+
+        List<Integer> result = Result.gradingStudents(grades);
+
+        bufferedWriter.write(
+            result.stream()
+                .map(Object::toString)
+                .collect(joining("\n"))
+            + "\n"
+        );
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+2.REMOVE DUPLICTES 12
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        String s=sc.next();
+        Set<Character> set=new LinkedHashSet<>();
+        for(int i=0;i<s.length();i++)
+            set.add(s.charAt(i));
+        
+        for(char i:set)
+            System.out.print(i);
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+3.JAVA HASHSET
+
+Set<String> set=new HashSet<>();
+for(int i=0;i<t;i++){
+    set.add(pair_left[i]+" "+pair_right[i]);
+    System.out.println(set.size());
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+4.APPLE AND ORANGE 
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'countApplesAndOranges' function below.
+     *
+     * The function accepts following parameters:
+     *  1. INTEGER s
+     *  2. INTEGER t
+     *  3. INTEGER a
+     *  4. INTEGER b
+     *  5. INTEGER_ARRAY apples
+     *  6. INTEGER_ARRAY oranges
+     */
+
+    public static void countApplesAndOranges(int s, int t, int a, int b, List<Integer> apples, List<Integer> oranges) {
+        int ac=0,oc=0;
+        for(int i:apples){
+            int d=a+i;
+            if(d>=s && d<=t)
+                ac++;
+        }
+        for(int i:oranges){
+            int d=b+i;
+            if(d>=s && d<=t)
+                oc++;
+        }
+        System.out.println(ac+"\n"+oc);
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        int s = Integer.parseInt(firstMultipleInput[0]);
+
+        int t = Integer.parseInt(firstMultipleInput[1]);
+
+        String[] secondMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        int a = Integer.parseInt(secondMultipleInput[0]);
+
+        int b = Integer.parseInt(secondMultipleInput[1]);
+
+        String[] thirdMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        int m = Integer.parseInt(thirdMultipleInput[0]);
+
+        int n = Integer.parseInt(thirdMultipleInput[1]);
+
+        List<Integer> apples = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+            .map(Integer::parseInt)
+            .collect(toList());
+
+        List<Integer> oranges = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+            .map(Integer::parseInt)
+            .collect(toList());
+
+        Result.countApplesAndOranges(s, t, a, b, apples, oranges);
+
+        bufferedReader.close();
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+5.JAVA MAP 
+
+//Complete this code or write your own from scratch
+import java.util.*;
+import java.io.*;
+
+class Solution{
+	public static void main(String []argh)
+	{
+		Scanner in = new Scanner(System.in);
+		int n=in.nextInt();
+		in.nextLine();
+        HashMap<String,Integer> mp= new HashMap<>();
+		for(int i=0;i<n;i++)
+		{
+			String name=in.nextLine();
+			int phone=in.nextInt();
+            mp.put(name,phone);
+			in.nextLine();
+		}
+		while(in.hasNext())
+		{
+			String s=in.nextLine();
+            if(mp.containsKey(s))
+                System.out.println(s+"="+mp.get(s));
+            else
+                System.out.println("Not found");
+		}
+	}
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+6.SALES BY MATCH
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'sockMerchant' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER n
+     *  2. INTEGER_ARRAY ar
+     */
+
+    public static int sockMerchant(int n, List<Integer> ar) {
+    // Write your code here
+        HashMap<Integer,Integer> mp=new HashMap<>();
+        int c=0;
+        for(int i:ar){
+            if(mp.containsKey(i)){
+                mp.put(i,mp.get(i)+1);
+                if(mp.get(i)%2==0)
+                    c++;
+            }
+            else
+                mp.put(i,1);
+        }
+        return c;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Integer> ar = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+            .map(Integer::parseInt)
+            .collect(toList());
+
+        int result = Result.sockMerchant(n, ar);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+7.BREAKING THE RECORDS
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'breakingRecords' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts INTEGER_ARRAY scores as parameter.
+     */
+
+    public static List<Integer> breakingRecords(List<Integer> scores) {
+    // Write your code here
+        List<Integer> list= new ArrayList<>();
+        int max=scores.get(0),min=scores.get(0),maxc=0,minc=0;
+        for(int i: scores){
+            if(i>max){
+                max=i;
+                maxc++;
+            }
+            if(i<min){
+                min=i;
+                minc++;
+            }
+        }
+        list.add(maxc);list.add(minc);
+        return list;
+
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<Integer> scores = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+            .map(Integer::parseInt)
+            .collect(toList());
+
+        List<Integer> result = Result.breakingRecords(scores);
+
+        bufferedWriter.write(
+            result.stream()
+                .map(Object::toString)
+                .collect(joining(" "))
+            + "\n"
+        );
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+8.REMOVE CHARACTERS 2
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        String s1=sc.next();
+        String s2=sc.next();
+        String res="";
+        List<String> list=new ArrayList<>();
+        for(int i=0;i<s2.length();i++){
+            list.add(""+s2.charAt(i));
+        }
+        for(int i=0;i<s1.length();i++){
+            if(list.contains(""+s1.charAt(i)))
+                list.remove(""+s1.charAt(i));
+            else
+                res+=s1.charAt(i);
+        }
+        System.out.print(res);
+    }
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+9. DIGIT FREQUENCY
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    char s[1000];
+    scanf("%s",s);
+    int arr[10]={0,0,0,0,0,0,0,0,0,0};
+    for(int i=0;i<strlen(s);i++){
+        if(s[i]-'0'>=0 && s[i]-'0'<=9){
+            arr[s[i]-'0']++;
+        }
+    }
+    for(int i=0;i<10;i++){
+        printf("%d ",arr[i]);
+    }
+    return 0;
+}
